@@ -9,9 +9,9 @@ const QuoteGenerator = () => {
     try {
       const response = await fetch('https://animechan.xyz/api/random');
       const data = await response.json();
-      setCurrentQuote(`${data.content} - ${data.author}`);
+      setCurrentQuote(`"${data.quote}" - ${data.character} (${data.anime})`);
     } catch (error) {
-      setCurrentQuote('Failed to fetch quote. Please try again.');
+      setCurrentQuote('Failed to fetch anime quote. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -19,7 +19,7 @@ const QuoteGenerator = () => {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '5rem' }}>
-      <h1>Random Quote Generator</h1>
+      <h1>Random Anime Quote Generator</h1>
       <button
         onClick={generateQuote}
         style={{ padding: '10px 20px', fontSize: '16px', marginTop: '1rem' }}
@@ -28,7 +28,9 @@ const QuoteGenerator = () => {
         {isLoading ? 'Loading...' : 'Generate Quote'}
       </button>
       {currentQuote && (
-        <p style={{ marginTop: '2rem', fontStyle: 'italic' }}>{currentQuote}</p>
+        <p style={{ marginTop: '2rem', fontStyle: 'italic', maxWidth: '600px', margin: '2rem auto' }}>
+          {currentQuote}
+        </p>
       )}
     </div>
   );
